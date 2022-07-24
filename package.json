@@ -1,0 +1,18 @@
+{
+	"name": "min-vue",
+	"version": "1.0.0",
+	"scripts": {
+		"test": "jest"
+	},
+	"main": "index.js",
+	"repository": "git@github.com:ShiJoJo/min-vue.git",
+	"author": "ShiJoJo <1687859172@qq.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@babel/core": "^7.18.9",
+		"@babel/preset-env": "^7.18.9",
+		"@types/jest": "^28.1.6",
+		"babel-jest": "^28.1.3",
+		"jest": "^28.1.3"
+	}
+}
