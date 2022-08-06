@@ -1,6 +1,6 @@
 import { tick, triger } from "./effect";
 
-export function reactivity(inf) {
+export function reactive(inf) {
 	return new Proxy(inf, {
 		get(target, key) {
 			const val = Reflect.get(target, key);
