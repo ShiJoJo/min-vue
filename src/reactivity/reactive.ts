@@ -1,16 +1,14 @@
-import { tick, triger } from "./effect";
+import { mutableHandlers, readonlyHandlers } from "./baseHandle";
+
 
 export function reactive(inf) {
-	return new Proxy(inf, {
-		get(target, key) {
-			const val = Reflect.get(target, key);
-			tick(target, key);
-			return val;
-		},
-		set(target, key, value) {
-			const val = Reflect.set(target, key, value);
-			triger(target, key);
-			return val;
-		},
-	});
+	return creatObjectReactive(inf, mutableHandlers);
+}
+
+export function readonly(inf) {
+	return creatObjectReactive(inf, readonlyHandlers);
+}
+
+function creatObjectReactive(inf, fuc) {
+	return new Proxy(inf, fuc);
 }
