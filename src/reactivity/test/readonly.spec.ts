@@ -1,4 +1,4 @@
-import { readonly } from "../reactive";
+import { isReactive, isReadOnly, reactive, readonly } from "../reactive";
 
 describe("readonly", () => {
 	it("happy path", () => {
@@ -13,4 +13,13 @@ describe("readonly", () => {
 		callWarn.age = 2;
 		expect(console.warn).toBeCalled();
 	});
+
+	it("isReadOnly and isReactive", () => {
+		const foo = { age: 1 };
+		const isReadOnlyFoo = readonly(foo);
+		const isReactiveFoo = reactive(foo);
+		expect(isReactive(isReactiveFoo)).toBe(true);
+		expect(isReadOnly(isReadOnlyFoo)).toBe(true);
+		expect(isReactive(foo)).toBe(false);
+	})
 });

@@ -1,4 +1,5 @@
 import { tick, triger } from "./effect";
+import { isReactiveFlag } from "./reactive";
 const get = createGetter();
 const set = createSetter();
 const readGet = createGetter(true);
@@ -7,6 +8,11 @@ const readGet = createGetter(true);
 function createGetter(readonly = false) {
 	return function get(target, key) {
 		const val = Reflect.get(target, key);
+		if (key === isReactiveFlag.Is_Reactive) {
+			return !readonly;
+		} else if (key === isReactiveFlag.Is_ReadOnly) {
+			return readonly;
+		}
 		if (!readonly) {
 			tick(target, key);
 		}
