@@ -1,4 +1,4 @@
-import { tick, triger } from "./effect";
+import { track, triger } from "./effect";
 import { isReactiveFlag } from "./reactive";
 const get = createGetter();
 const set = createSetter();
@@ -14,7 +14,7 @@ function createGetter(readonly = false) {
 			return readonly;
 		}
 		if (!readonly) {
-			tick(target, key);
+			track(target, key);
 		}
 		return val;
 	};
