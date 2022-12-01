@@ -22,4 +22,17 @@ describe("readonly", () => {
 		expect(isReadOnly(isReadOnlyFoo)).toBe(true);
 		expect(isReactive(foo)).toBe(false);
 	})
+	it('nested readonly', () => {
+		const original = {
+			nested: {
+				foo: 1
+			},
+			arrary: [{ bar: 2 }]
+		}
+		const observed = readonly(original);
+		expect(isReadOnly(observed.nested)).toBe(true);
+		expect(isReadOnly(observed.arrary)).toBe(true);
+		expect(isReadOnly(observed.arrary[0])).toBe(true);
+
+	});
 });
