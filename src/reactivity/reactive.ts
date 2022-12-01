@@ -23,6 +23,9 @@ export function isReactive(foo) {
 export function isReadOnly(foo) {
 	return !!foo[isReactiveFlag.Is_ReadOnly];
 }
+export function isProxy(value) {
+	return isReactive(value) || isReadOnly(value);
+}
 
 function creatObjectReactive(inf, fuc) {
 	return new Proxy(inf, fuc);
