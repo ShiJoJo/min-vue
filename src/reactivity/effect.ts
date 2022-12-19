@@ -56,20 +56,26 @@ export function track(target, key) {
 		dep = new Set();
 		depsMap.set(key, dep);
 	}
+	trackEffects(dep);
+}
 
+export function trackEffects(dep) {
 	if (dep.has(activeEffect)) return;
 	dep.add(activeEffect);
 	activeEffect.deps.push(dep);
 }
 
-function isTrackIng() {
+export function isTrackIng() {
 	return shouldTrack && activeEffect !== undefined;
 }
 
 export function triger(target, key) {
 	let targetMap = newMap.get(target);
 	let dep = targetMap.get(key);
+	trigerEffects(dep);
+}
 
+export function trigerEffects(dep) {
 	for (let fn of dep) {
 		if (fn.scheduler) {
 			fn.scheduler();
